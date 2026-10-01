@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#fff6d6" />
+    <title>gaylord</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" type="image/jpeg" href="/logo.jpeg" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">
+          <img src="/logo.jpeg" alt="Logo">
+        </div>
+        <strong>GayLord</strong>
+      </div>
+      <div class="top-actions">
+        <button id="leaderboardBtn" class="pixel-btn">
+          🏆 <span>LEADERBOARD</span>
+        </button>
+        <button id="chatBtn" class="pixel-btn">
+          💬 <span>CHAT</span> <b id="onlineCount">0</b>
+        </button>
+        <button id="themeBtn" class="pixel-btn" title="Toggle dark mode">
+          🌙
+        </button>
+        <button id="profileBtn" class="avatar-btn" title="Profile">
+          <span id="avatarSmall">🙂</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="game-card">
+        <div class="hud">
+          <div>
+            <span class="label">PLAYER</span
+            ><strong id="hudName">Player</strong>
+          </div>
+          <div class="score-box">
+            <span class="label">SCORE</span><strong id="score">00000</strong>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <button
+            id="fullscreenBtn"
+            class="fullscreen-btn"
+            aria-label="Fullscreen"
+            title="Fullscreen"
+          >
+            ⛶
+          </button>
+          <canvas id="game" width="960" height="420"></canvas>
+          <div id="pauseBadge" class="pause-badge hidden">PAUSED</div>
+          <div id="startOverlay" class="overlay">
+            <div class="overlay-box">
+              <div class="big-title">GayLord</div>
+              <p>SPACE / ↑ = JUMP</p>
+              <p>↓ = CROUCH</p>
+              <button id="startBtn" class="pixel-btn primary">START RUN</button>
+            </div>
+          </div>
+          <div id="gameOverOverlay" class="overlay hidden">
+            <div class="overlay-box">
+              <div class="big-title">BONK.</div>
+              <p id="finalScore">Score: 0</p>
+              <button id="restartBtn" class="pixel-btn primary">
+                RUN AGAIN
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="controls-hint">
+          <span>SPACE / ↑ <b>JUMP</b></span
+          ><span>↓ <b>CROUCH</b></span
+          ><span>ESC <b>PAUSE</b></span>
+        </div>
+      </section>
+
+      <aside class="side-card">
+        <h2>YOUR RUN</h2>
+        <div class="profile-mini">
+          <div id="sideAvatar" class="avatar-large">🙂</div>
+          <div>
+            <strong id="sideName">Player</strong><small>PERSONAL BEST</small
+            ><b id="bestScore">0</b>
+          </div>
+        </div>
+        <div class="tip-box">
+          <strong>ABSURD ADVICE</strong>
+          <p>
+            Do not hit the mysterious cylinder. It has done nothing wrong.
+            Probably.
+          </p>
+        </div>
+        <div class="settings-mini">
+          <label
+            >WORLD
+            <select id="worldSelect">
+              <option value="sunny">Sunny</option>
+              <option value="sunset">Sunset</option>
+              <option value="night">Night</option>
+              <option value="candy">Candy</option>
+              <option value="forest">Forest</option>
+            </select></label
+          ><label
+            >SPEED
+            <select id="speedSelect">
+              <option value="chill">Chill</option>
+              <option value="normal" selected>Normal</option>
+              <option value="turbo">Turbo</option>
+            </select></label
+          >
+        </div>
+        <button id="sideLeaderboardBtn" class="wide-btn">
+          VIEW FULL LEADERBOARD
+        </button>
+        <button id="sideChatBtn" class="wide-btn">OPEN GLOBAL CHAT</button>
+      </aside>
+    </main>
+
+    <div id="modalBackdrop" class="modal-backdrop hidden">
+      <section id="leaderboardPanel" class="modal hidden">
+        <button class="close" data-close>×</button>
+        <h2>🏆 LEADERBOARD</h2>
+        <div id="leaderboardList"></div>
+      </section>
+      <section id="chatPanel" class="modal hidden">
+        <button class="close" data-close>×</button>
+        <h2>
+          💬 GLOBAL CHAT
+          <span style="margin-right: 1cm" class="online-pill"
+            >🟢 <span id="onlineCountModal">0</span> online</span
+          >
+        </h2>
+        <div id="chatMessages" class="chat-messages"></div>
+        <form id="chatForm" class="chat-form">
+          <input
+            id="chatInput"
+            maxlength="240"
+            placeholder="Say something ridiculous..."
+            autocomplete="off"
+          /><button class="pixel-btn primary">SEND</button>
+        </form>
+      </section>
+      <section id="profilePanel" class="modal hidden">
+        <button class="close" data-close>×</button>
+        <h2>👤 PROFILE</h2>
+        <div class="profile-editor">
+          <div id="profilePreview" class="avatar-preview">🙂</div>
+          <label
+            >Username<input
+              id="nameInput"
+              maxlength="24"
+              placeholder="Your name"
+          /></label>
+          <label
+            >Profile picture<input
+              id="avatarInput"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+          /></label>
+          <label
+            >Run music<select id="musicSelect">
+              <option value="off">No music</option>
+              <option value="arcade">Arcade Dash</option>
+              <option value="chill">Chill Runner</option>
+              <option value="night">Night Drive</option>
+            </select></label
+          >
+          <button id="saveProfileBtn" class="pixel-btn primary">
+            SAVE PROFILE
+          </button>
+        </div>
+      </section>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/game.js"></script>
+  </body>
+</html>
